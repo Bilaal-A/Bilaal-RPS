@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 /**
  * Each player or team will create their own Player, this is only an example....
  * 
@@ -29,6 +31,13 @@ public class Bilaal implements Player
             index++;
         }
         return index;
+    }
+
+    private int oneTwoThree(int x, int y) {
+        x += y;
+        if (x<1) {while (x < 1 || x > 3) {x+=3;}}
+        if (x>3) {while (x < 1 || x > 3) {x-=3;}}
+        return x;
     }
 
     private String threeCount(int currentTurn, String[] moves) {
@@ -155,19 +164,42 @@ public class Bilaal implements Player
 //      -----NO PATTERN DETECTED-----
 
         else {
-            if (myScore<opponentScore) {reverser(reverse);}
-            if (opponentMoves[currentTurn-1].equals("r")) {
-                if (reverse) {return "s";}
-                else {return "p";}
-            }
-            if (opponentMoves[currentTurn-1].equals("p")) {
-                if (reverse) {return "r";}
-                else {return "s";}
-            }
-            else {
-                if (reverse) {return "p";}
-                else {return "r";}
-            }
+            int x = oneTwoThree(1, 0);
+            boolean won = ((Objects.equals(myMoves[currentTurn - 1], "r")) && (Objects.equals(opponentMoves[currentTurn - 1], "s")) ) ||
+                    ((Objects.equals(myMoves[currentTurn - 1], "p")) && (Objects.equals(opponentMoves[currentTurn - 1], "r")) ) ||
+                    ((Objects.equals(myMoves[currentTurn - 1], "s")) && (Objects.equals(opponentMoves[currentTurn - 1], "p")) );
+
+            boolean lost = ((Objects.equals(myMoves[currentTurn - 1], "r")) && (Objects.equals(opponentMoves[currentTurn - 1], "p")) ) ||
+                    ((Objects.equals(myMoves[currentTurn - 1], "p")) && (Objects.equals(opponentMoves[currentTurn - 1], "s")) ) ||
+                    ((Objects.equals(myMoves[currentTurn - 1], "s")) && (Objects.equals(opponentMoves[currentTurn - 1], "r")) );
+
+            boolean tie = ((Objects.equals(myMoves[currentTurn - 1], "r")) && (Objects.equals(opponentMoves[currentTurn - 1], "r")) ) ||
+                    ((Objects.equals(myMoves[currentTurn - 1], "p")) && (Objects.equals(opponentMoves[currentTurn - 1], "p")) ) ||
+                    ((Objects.equals(myMoves[currentTurn - 1], "s")) && (Objects.equals(opponentMoves[currentTurn - 1], "s")) );
+
+            if (won && Objects.equals(myMoves[currentTurn - 1], "r")) {return "r";}
+            if (won && Objects.equals(myMoves[currentTurn - 1], "p")) {return "p";}
+            if (won && Objects.equals(myMoves[currentTurn - 1], "s")) {return "s";}
+            if (tie && Objects.equals(myMoves[currentTurn - 1], "r")) {return "p";}
+            if (tie && Objects.equals(myMoves[currentTurn - 1], "p")) {return "r";}
+            if (tie && Objects.equals(myMoves[currentTurn - 1], "s")) {return "s";}
+            if (lost && Objects.equals(myMoves[currentTurn - 1], "r")) {return "s";}
+            if (lost && Objects.equals(myMoves[currentTurn - 1], "p")) {return "p";}
+            if (lost && Objects.equals(myMoves[currentTurn - 1], "s")) {return "r";}
+
+//            if (myScore<opponentScore) {reverser(reverse);}
+//            if (opponentMoves[currentTurn-1].equals("r")) {
+//                if (reverse) {return "s";}
+//                else {return "p";}
+//            }
+//            if (opponentMoves[currentTurn-1].equals("p")) {
+//                if (reverse) {return "r";}
+//                else {return "s";}
+//            }
+//            else {
+//                if (reverse) {return "p";}
+//                else {return "r";}
+//            }
         }
 
 
@@ -187,6 +219,4 @@ public class Bilaal implements Player
         return name;
     }
 }
-
-
 

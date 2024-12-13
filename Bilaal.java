@@ -60,7 +60,15 @@ public class Bilaal implements Player
     private boolean reverser(boolean input) {
         if (input) {return false;}
         else {return true;}
-}
+    }
+
+    private boolean allMovesSame(String [] opponentMoves) {
+        return (opponentMoves[0].equals(opponentMoves[1]) && opponentMoves[0].equals(opponentMoves[2]) &&
+                opponentMoves[0].equals(opponentMoves[3]) && opponentMoves[0].equals(opponentMoves[4]) &&
+                opponentMoves[0].equals(opponentMoves[5]));
+    }
+
+
 
     public String move(String [] myMoves, String [] opponentMoves, int myScore, int opponentScore)
     {
@@ -91,9 +99,7 @@ public class Bilaal implements Player
 
 //      -----CHECK FOR AND COUNTER PATTERNS------
 
-        boolean allSame = (opponentMoves[0].equals(opponentMoves[1]) && opponentMoves[0].equals(opponentMoves[2]) &&
-                opponentMoves[0].equals(opponentMoves[3]) && opponentMoves[0].equals(opponentMoves[4]) &&
-                opponentMoves[0].equals(opponentMoves[5]));
+        boolean allSame = allMovesSame(opponentMoves);
 
         boolean tripleRotate = (opponentMoves[0].equals(opponentMoves[3]) && opponentMoves[1].equals(opponentMoves[4])
                 && opponentMoves[2].equals(opponentMoves[5]));
@@ -101,22 +107,22 @@ public class Bilaal implements Player
 
 
 
+
 //      All Rock
-        if (allSame && opponentMoves[0].equals("r")) {
+        if (allSame && opponentMoves[0].equals("r") && opponentMoves[currentTurn-1].equals("r")) {
             return "p";
         }
 //      All Paper
-        if (allSame && opponentMoves[0].equals("p")) {
+        if (allSame && opponentMoves[0].equals("p") && opponentMoves[currentTurn-1].equals("p")) {
             return "s";
         }
 //      All Scissors
-        if (allSame && opponentMoves[0].equals("s")) {
+        if (allSame && opponentMoves[0].equals("s") && opponentMoves[currentTurn-1].equals("s")) {
             return "r";
         }
 //      Triple Rotate Start Rock
         if (tripleRotate && opponentMoves[0].equals("r") && opponentMoves[1].equals("p")) {
-            if((threeCount(currentTurn, opponentMoves)).equals("A")) {
-                System.out.println("1");return "p";}
+            if((threeCount(currentTurn, opponentMoves)).equals("A")) {return "p";}
             if((threeCount(currentTurn, opponentMoves)).equals("B")) {return "s";}
             if((threeCount(currentTurn, opponentMoves)).equals("C")) {return "r";}
         }

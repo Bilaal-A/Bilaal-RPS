@@ -12,7 +12,7 @@ public class Main
 
         // Add players to game
         players[0] = new Example1();
-        players[1] = new Bilaal();
+        players[1] = new P5AshrafBilaal();
         players[2] = new MJ();
 
         //construct the game with the classes in the players array, calls on play and displays the score

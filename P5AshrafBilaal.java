@@ -9,7 +9,7 @@ import java.util.Objects;
  * You can create additional methods but must have the move method
  * 
  */
-public class Bilaal implements Player
+public class P5AshrafBilaal implements Player
 {
     private static String name = "Bilaal";
 
